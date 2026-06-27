@@ -1,0 +1,24 @@
+-- =====================================================================
+-- Migration 001_initial
+-- =====================================================================
+-- Ce fichier est un marqueur de DOCUMENTATION, pas un script execute
+-- automatiquement par l'application (voir database.py, fonction
+-- initialiser_base, et la note dans schema.sql sur la table
+-- schema_versions pour le pourquoi : SQLite ne permet pas d'ajouter
+-- une colonne de maniere idempotente via un script SQL brut, l'ALTER
+-- TABLE ADD COLUMN echoue si la colonne existe deja).
+--
+-- Il represente le schema de reference de la Version 2 de SOURCE
+-- ISABEE, tel que defini dans schema.sql au moment ou le suivi de
+-- versions (table schema_versions) a ete introduit en V3. Il ne fait
+-- rien de plus que marquer le point de depart : toute base de
+-- donnees, neuve ou deja en production, possede deja ce schema avant
+-- meme l'introduction de ce systeme de suivi.
+--
+-- Tables couvertes par ce point de depart : users, subjects,
+-- downloads, favorites, comments, payments, messages, announcements,
+-- notifications, logs, settings.
+--
+-- Voir database.py (fonction _enregistrer_version) pour la maniere
+-- dont cette version est enregistree dans schema_versions.
+-- =====================================================================

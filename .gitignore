@@ -1,0 +1,11 @@
+# Secrets -- ne jamais committer (client_secret Google/Microsoft, cookie_secret)
+.streamlit/secrets.toml
+
+# Base de donnees et fichiers locaux (documents, photos, preuves de paiement)
+data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

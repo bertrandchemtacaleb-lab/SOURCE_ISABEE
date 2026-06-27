@@ -1,0 +1,219 @@
+/* =====================================================================
+   SOURCE ISABEE - Feuille de style V2
+   Inspiree des tableaux de bord administratifs modernes (reference :
+   Menutech). Palette imposee par le cahier des charges :
+     #1E3A8A (primaire fonce) #2563EB (primaire) #F8FAFC (fond)
+     #E5E7EB (bordures)       #FFFFFF (cartes)
+
+   Toutes les couleurs passent par des variables CSS (:root) afin que
+   le theme sombre (assets/style-sombre.css) puisse se contenter de
+   redefinir ces variables, sans dupliquer les regles ci-dessous.
+
+   Limite assumee : les selecteurs ciblant les elements internes de
+   Streamlit (data-testid="...") dependent de la version installee.
+   Ils sont stables sur les versions recentes (>=1.36, voir
+   requirements.txt) mais pourraient necessiter un ajustement si
+   Streamlit change sa structure HTML interne dans une future version
+   majeure. Les classes personnalisees (.carte, .etiquette-statut...)
+   ne sont pas concernees par cette limite : elles sont entierement
+   definies par cette application.
+   ===================================================================== */
+
+:root {
+    --couleur-primaire-foncee: #1E3A8A;
+    --couleur-primaire: #2563EB;
+    --couleur-fond: #F8FAFC;
+    --couleur-bordure: #E5E7EB;
+    --couleur-carte: #FFFFFF;
+    --couleur-texte: #1F2937;
+    --couleur-texte-secondaire: #6B7280;
+    --rayon-coin: 12px;
+    --rayon-coin-petit: 8px;
+    --ombre-legere: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+/* ---------------------------------------------------------------------
+   Fond general et typographie
+   --------------------------------------------------------------------- */
+div[data-testid="stAppViewContainer"],
+div[data-testid="stMain"] {
+    background-color: var(--couleur-fond);
+}
+
+html, body {
+    color: var(--couleur-texte);
+}
+
+h1, h2, h3 {
+    color: var(--couleur-primaire-foncee);
+}
+
+/* ---------------------------------------------------------------------
+   Sidebar verticale compacte
+   --------------------------------------------------------------------- */
+section[data-testid="stSidebar"] {
+    background-color: var(--couleur-carte);
+    border-right: 1px solid var(--couleur-bordure);
+}
+
+section[data-testid="stSidebar"] > div {
+    padding-top: 1rem;
+}
+
+section[data-testid="stSidebar"] button {
+    text-align: left;
+    justify-content: flex-start;
+}
+
+/* ---------------------------------------------------------------------
+   Barre superieure discrete
+   --------------------------------------------------------------------- */
+.barre-superieure-titre {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--couleur-primaire-foncee);
+    padding-top: 0.45rem;
+    letter-spacing: 0.01em;
+}
+
+/* ---------------------------------------------------------------------
+   En-tete de la page de connexion : logo + titre + texte secondaire,
+   tous deux centres (SOURCE ISABEE en gros caracteres).
+   --------------------------------------------------------------------- */
+.en-tete-connexion {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.en-tete-connexion h1 {
+    font-size: 2.15rem;
+    font-weight: 800;
+    color: var(--couleur-primaire-foncee);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.01em;
+}
+
+.en-tete-connexion p {
+    color: var(--couleur-texte-secondaire);
+    font-size: 1rem;
+    margin-top: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Cartes grises tres claires (indicateurs, documents, listes)
+   --------------------------------------------------------------------- */
+.carte {
+    background-color: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--rayon-coin);
+    box-shadow: var(--ombre-legere);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.carte-indicateur {
+    text-align: center;
+    padding: 1.25rem 1rem;
+}
+
+.carte-indicateur .valeur {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--couleur-primaire-foncee);
+    line-height: 1.15;
+}
+
+.carte-indicateur .libelle {
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.carte-document {
+    padding: 0.85rem 1rem;
+}
+
+.texte-secondaire {
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.85rem;
+}
+
+/* ---------------------------------------------------------------------
+   Etiquettes de statut
+   --------------------------------------------------------------------- */
+.etiquette-statut {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.etiquette-statut.etiquette-valide {
+    background-color: #DCFCE7;
+    color: #15803D;
+}
+
+.etiquette-statut.etiquette-rejete {
+    background-color: #FEE2E2;
+    color: #B91C1C;
+}
+
+/* ---------------------------------------------------------------------
+   Conteneurs Streamlit (st.container(border=True)) traites comme des
+   cartes sobres, coins arrondis et ombre legere.
+   --------------------------------------------------------------------- */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: var(--rayon-coin) !important;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] > div {
+    border-radius: var(--rayon-coin) !important;
+    box-shadow: var(--ombre-legere);
+    border-color: var(--couleur-bordure) !important;
+}
+
+/* ---------------------------------------------------------------------
+   Boutons : navigation sobre, coins arrondis
+   --------------------------------------------------------------------- */
+button[kind="primary"], button[data-testid="stBaseButton-primary"] {
+    background-color: var(--couleur-primaire) !important;
+    border-color: var(--couleur-primaire) !important;
+    border-radius: var(--rayon-coin-petit) !important;
+}
+
+button[kind="secondary"], button[data-testid="stBaseButton-secondary"] {
+    background-color: transparent !important;
+    border-color: var(--couleur-bordure) !important;
+    color: var(--couleur-texte) !important;
+    border-radius: var(--rayon-coin-petit) !important;
+}
+
+/* ---------------------------------------------------------------------
+   Champs de saisie et menus deroulants : coins arrondis, presentation
+   elegante, espacement genereux
+   --------------------------------------------------------------------- */
+input, textarea {
+    border-radius: var(--rayon-coin-petit) !important;
+}
+
+div[data-baseweb="select"] > div {
+    border-radius: var(--rayon-coin-petit) !important;
+}
+
+details[data-testid="stExpander"], div[data-testid="stExpander"] {
+    border-radius: var(--rayon-coin) !important;
+    border: 1px solid var(--couleur-bordure) !important;
+    box-shadow: var(--ombre-legere);
+}
+
+div[data-baseweb="popover"] {
+    border-radius: var(--rayon-coin) !important;
+}
+
+/* ---------------------------------------------------------------------
+   Espacement genereux entre les blocs principaux
+   --------------------------------------------------------------------- */
+div[data-testid="stVerticalBlock"] {
+    gap: 0.6rem;
+}
